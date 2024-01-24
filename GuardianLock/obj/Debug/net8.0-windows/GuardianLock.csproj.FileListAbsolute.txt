@@ -19,3 +19,5 @@ C:\Users\asand\Documents\GitHub\GuardianLock\GuardianLock\obj\Debug\net8.0-windo
 C:\Users\asand\Documents\GitHub\GuardianLock\GuardianLock\obj\Debug\net8.0-windows\GuardianLock.genruntimeconfig.cache
 C:\Users\asand\Documents\GitHub\GuardianLock\GuardianLock\obj\Debug\net8.0-windows\ref\GuardianLock.dll
 C:\Users\asand\Documents\GitHub\GuardianLock\GuardianLock\obj\Debug\net8.0-windows\GuardianLock.sourcelink.json
+C:\Users\asand\Documents\GitHub\GuardianLock\GuardianLock\obj\Debug\net8.0-windows\Themes\MenuButtonTheme.baml
+C:\Users\asand\Documents\GitHub\GuardianLock\GuardianLock\obj\Debug\net8.0-windows\App.baml

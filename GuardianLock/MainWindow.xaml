@@ -13,17 +13,46 @@
     
     <Border Background="#272537"
             CornerRadius="10">
-        
+
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200">
-                </ColumnDefinition>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="75">
-                </RowDefinition>
+                <RowDefinition Height="75" />
+                <RowDefinition />
+
             </Grid.RowDefinitions>
+
+            <TextBlock Text="GuardianLock"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Foreground="White"
+                       FontSize="22"
+                       Margin="20,0,0,0" />
+
+            <StackPanel Grid.Row="1">
+                <RadioButton Content="Home"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"/>
+                
+                <RadioButton Content="Discovery"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"/>
+                
+                <RadioButton Content="Featured"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"/>
+
+            </StackPanel>
         </Grid>
 
     </Border>
