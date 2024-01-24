@@ -36,7 +36,8 @@
                        HorizontalAlignment="Left"
                        Foreground="White"
                        FontSize="22"
-                       Margin="20,0,0,0" />
+                       Margin="20,0,0,0"
+                       FontFamily="/Fonts/#Poppins"/>
 
             <StackPanel Grid.Row="1">
                 <RadioButton Content="Home"
@@ -73,7 +74,8 @@
             <ContentControl Grid.Row="1"
                             Grid.Column="1"
                             Margin="10"
-                            Content="{Binding CurrentView}"/>
+                            Content="{Binding CurrentView}"
+                            FontFamily="Fonts/#Poppins"/>
         </Grid>
 
     </Border>

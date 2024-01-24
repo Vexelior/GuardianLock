@@ -43,7 +43,7 @@
 
                     <Image Width="175"
                            Height="176"
-                           Source="/Images/man.png"
+                           Source="/MVVM/View/man.png"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center" Margin="225,0,0,0" RenderTransformOrigin="0.52,0.779" />
 
