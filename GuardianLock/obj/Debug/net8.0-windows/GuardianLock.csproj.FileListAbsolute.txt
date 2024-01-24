@@ -21,3 +21,4 @@ C:\Users\asand\Documents\GitHub\GuardianLock\GuardianLock\obj\Debug\net8.0-windo
 C:\Users\asand\Documents\GitHub\GuardianLock\GuardianLock\obj\Debug\net8.0-windows\GuardianLock.sourcelink.json
 C:\Users\asand\Documents\GitHub\GuardianLock\GuardianLock\obj\Debug\net8.0-windows\Themes\MenuButtonTheme.baml
 C:\Users\asand\Documents\GitHub\GuardianLock\GuardianLock\obj\Debug\net8.0-windows\App.baml
+C:\Users\asand\Documents\GitHub\GuardianLock\GuardianLock\obj\Debug\net8.0-windows\Themes\TextBoxTheme.baml
