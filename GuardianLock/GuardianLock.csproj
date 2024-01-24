@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <None Remove="Images\man.png" />
-    <None Remove="MVVM\View\man.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,7 +19,6 @@
 
   <ItemGroup>
     <Resource Include="Images\man.png" />
-    <Resource Include="MVVM\View\man.png" />
   </ItemGroup>
 
 </Project>

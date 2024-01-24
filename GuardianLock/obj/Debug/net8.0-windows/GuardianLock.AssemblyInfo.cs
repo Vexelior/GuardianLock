@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GuardianLock")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7f2afb173c44abcc3b4723a3e34a4749410e498c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5e783c83c0ac3be13746662717cc87d80ffbed9c")]
 [assembly: System.Reflection.AssemblyProductAttribute("GuardianLock")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GuardianLock")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
