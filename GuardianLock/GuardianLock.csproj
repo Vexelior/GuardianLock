@@ -9,16 +9,25 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\man.png" />
+    <None Remove="Images\logo.ico" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Fonts\" />
-    <Folder Include="MVVM\Model\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\man.png" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\logo.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Register.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

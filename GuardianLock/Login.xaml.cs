@@ -1,18 +1,9 @@
 ﻿using GuardianLock.MVVM.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace GuardianLock
 {
@@ -21,12 +12,22 @@ namespace GuardianLock
     /// </summary>
     public partial class Login : Window
     {
+        /// <summary>
+        /// Represents the login window of the application.
+        /// </summary>
         public Login()
         {
             InitializeComponent();
             DataContext = new LoginViewModel();
+
+            Uri iconUri = new("pack://application:,,,/Images/logo.ico", UriKind.RelativeOrAbsolute);
+            this.Icon = BitmapFrame.Create(iconUri);
         }
 
+        /// <summary>
+        /// Event handler for the PasswordBox's PasswordChanged event.
+        /// Updates the password in the view model when the password is changed.
+        /// </summary>
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (DataContext is LoginViewModel viewModel)
@@ -36,7 +37,32 @@ namespace GuardianLock
             }
         }
 
-        private SecureString ConvertToSecureString(string password)
+        /// <summary>
+        /// Event handler for the TextBlock's MouseLeftButtonDown event.
+        /// Opens the registration window and closes the login window.
+        /// </summary>
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Register regWidow = new();
+            Application.Current.MainWindow = regWidow;
+            regWidow.Show();
+
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window is Login)
+                {
+                    window.Close();
+                    break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Converts a string password to a SecureString.
+        /// </summary>
+        /// <param name="password">The password to convert.</param>
+        /// <returns>A SecureString representation of the password.</returns>
+        private static SecureString ConvertToSecureString(string password)
         {
             if (string.IsNullOrEmpty(password))
                 return null;
@@ -49,6 +75,5 @@ namespace GuardianLock
 
             return securePassword;
         }
-
     }
 }
