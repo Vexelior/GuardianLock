@@ -1,7 +1,12 @@
-﻿using GuardianLock.Core;
+﻿using GuardianLock.Helper;
+using GuardianLock.Core;
 using System.Windows;
 using System.Security;
 using System.Net;
+using GuardianLock.Helper.DAL;
+using System.Text;
+using System.Diagnostics;
+using System.Data.SqlClient;
 
 namespace GuardianLock.MVVM.ViewModel
 {
@@ -86,7 +91,7 @@ namespace GuardianLock.MVVM.ViewModel
             }
             else
             {
-                MessageBox.Show("Invalid credentials. Please try again.", "Login Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Invalid username or password.", "Oops!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -96,9 +101,30 @@ namespace GuardianLock.MVVM.ViewModel
         /// <returns><c>true</c> if the credentials are valid; otherwise, <c>false</c>.</returns>
         private static bool IsValidCredentials(string username, SecureString password)
         {
+            // Use parameterized queries to avoid SQL injection
+            object userNameExists = DAL.ExecuteQuery("SELECT * FROM Users WHERE Username = @Username", new SqlParameter("@Username", username));
+
+            if (userNameExists == null)
+            {
+                MessageBox.Show("Username does not exist.");
+                return false;
+            }
+
+            // Retrieve salt as bytes directly
+            string passwordSaltString = DAL.ExecuteQuery("SELECT Salt FROM Users WHERE Username = @Username", new SqlParameter("@Username", username)).ToString();
+            byte[] passwordSaltBytes = Convert.FromBase64String(passwordSaltString);
+
+            string passwordHash = DAL.ExecuteQuery("SELECT PasswordHash FROM Users WHERE Username = @Username", new SqlParameter("@Username", username)).ToString();
             string passwordString = new NetworkCredential(string.Empty, password).Password;
 
-            if (username == "admin" && passwordString == "admin")
+            // Convert salt to hex string for debugging purposes
+            string passwordSalt = BitConverter.ToString(passwordSaltBytes).Replace("-", "");
+            Debug.WriteLine(passwordSalt);
+
+            // Convert hex string back to bytes
+            byte[] salt = Convert.FromHexString(passwordSalt);
+
+            if (Encryption.VerifyPassword(passwordString, passwordSaltBytes, passwordHash))
             {
                 return true;
             }
@@ -106,20 +132,6 @@ namespace GuardianLock.MVVM.ViewModel
             {
                 return false;
             }
-        }
-
-        public static SecureString ConvertToSecureString(string password)
-        {
-            if (string.IsNullOrEmpty(password))
-                return null;
-
-            var securePassword = new SecureString();
-            foreach (char c in password)
-            {
-                securePassword.AppendChar(c);
-            }
-
-            return securePassword;
         }
     }
 }

@@ -3,6 +3,7 @@ using GuardianLock.MVVM.ViewModel;
 using System.Security;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 namespace GuardianLock
@@ -21,28 +22,6 @@ namespace GuardianLock
             this.Icon = BitmapFrame.Create(iconUri);
         }
 
-        //private void BtnReg_Click(object sender, RoutedEventArgs e)
-        //{
-        //    try
-        //    {
-        //        string username = this.UsernameTextBox.Text;
-        //        string password = this.PasswordBox.Password;
-        //        string confirmPassword = this.ConfirmPasswordBox.Password;
-
-        //        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(confirmPassword))
-        //        {
-        //            MessageBox.Show("All fields are required.", "Oops!", MessageBoxButton.OK, MessageBoxImage.Error);
-        //            return;
-        //        }
-
-        //        RegistrationLogic.SaveInfo(username, password);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show($"Something went wrong, Please try again later. - {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        //    }
-        //}
-
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (DataContext is RegisterViewModel viewModel)
@@ -58,6 +37,25 @@ namespace GuardianLock
             {
                 var passwordBox = (PasswordBox)sender;
                 viewModel.ConfirmPassword = ConvertToSecureString(passwordBox.Password);
+            }
+        }
+
+        /// <summary>
+        /// Opens the login window and closes the register window.
+        /// </summary>
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Login loginWindow = new();
+            Application.Current.MainWindow = loginWindow;
+            loginWindow.Show();
+
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window is Register)
+                {
+                    window.Close();
+                    break;
+                }
             }
         }
 

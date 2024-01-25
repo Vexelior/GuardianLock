@@ -6,10 +6,16 @@ namespace GuardianLock.Helper.DAL
 {
     public class DAL
     {
-        public static int ExecuteQuery(string query)
+        private readonly static string connectionString = "Data Source=(localdb)\\MSSQLLocalDb;Database=GuardianLock;Initial Catalog=GuardianLock;Integrated Security=True";
+
+        /// <summary>
+        /// Executes a query.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public static object ExecuteQuery(string query)
         {
-            string connectionString = "Data Source=(localdb)\\MSSQLLocalDb;Database=GuardianLock;Initial Catalog=GuardianLock;Integrated Security=True";
-            int rowCount = 0;
+            object rowCount = null;
 
             SqlConnection connection = new(connectionString);
             SqlCommand command = new(query, connection);
@@ -25,12 +31,7 @@ namespace GuardianLock.Helper.DAL
 
                 if (query.Contains("SELECT"))
                 {
-                    var selectedRow = command.ExecuteScalar();
-
-                    if (selectedRow != null)
-                    {
-                        rowCount = 1;
-                    }
+                    rowCount = command.ExecuteScalar();
                 }
                 else if (query.Contains("INSERT") || query.Contains("UPDATE") || query.Contains("DELETE"))
                 {
@@ -47,6 +48,35 @@ namespace GuardianLock.Helper.DAL
             }
 
             return rowCount;
+        }
+
+        /// <summary>
+        /// Executes a query with the given parameters.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public static object ExecuteQuery(string query, SqlParameter parameters)
+        {
+            using SqlConnection connection = new(connectionString);
+            using SqlCommand command = new(query, connection);
+
+            if (parameters != null)
+            {
+                connection.Open();
+                command.CommandText = query;
+                command.CommandType = CommandType.Text;
+                command.Connection = connection;
+                command.CommandTimeout = 12 * 3600;
+
+                command.Parameters.Add(parameters);
+            }
+            else
+            {
+                return null;
+            }
+
+            return command.ExecuteScalar();
         }
     }
 }

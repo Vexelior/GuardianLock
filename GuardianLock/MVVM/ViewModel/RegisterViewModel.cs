@@ -91,7 +91,7 @@ namespace GuardianLock.MVVM.ViewModel
             {
                 string passwordString = new NetworkCredential(string.Empty, password).Password;
 
-                if (RegistrationLogic.SaveRegistrationInfo(username, passwordString) == true)
+                if (RegistrationModel.SaveRegistrationInfo(username, passwordString) == true)
                 {
                     Login loginWindow = new();
                     Application.Current.MainWindow = loginWindow;
@@ -125,11 +125,6 @@ namespace GuardianLock.MVVM.ViewModel
             if (confirmPasswordString != passwordString)
             {
                 return false;
-            }
-
-            if (username.Equals("Admin") && passwordString.Equals("Admin123!"))
-            {
-                return true;
             }
 
             return true;
