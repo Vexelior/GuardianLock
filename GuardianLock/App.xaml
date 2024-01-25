@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:GuardianLock"
              xmlns:viewModel="clr-namespace:GuardianLock.MVVM.ViewModel"
              xmlns:view="clr-namespace:GuardianLock.MVVM.View"
-             StartupUri="MainWindow.xaml">
+             StartupUri="Login.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

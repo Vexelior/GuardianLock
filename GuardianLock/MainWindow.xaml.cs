@@ -20,5 +20,10 @@ namespace GuardianLock
         {
             InitializeComponent();
         }
+
+        public MainWindow(object data)
+        {
+            InitializeComponent();
+        }
     }
 }

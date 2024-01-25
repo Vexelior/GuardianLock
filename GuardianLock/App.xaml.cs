@@ -10,5 +10,4 @@ namespace GuardianLock
     public partial class App : Application
     {
     }
-
 }
