@@ -1,12 +1,10 @@
 ﻿using GuardianLock.Helper;
 using GuardianLock.Helper.DAL;
-using System.Security.Cryptography;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows;
+using BCrypt.Net;
 
 namespace GuardianLock.MVVM.Model
-{    
+{
     /// <summary>
     /// Contains the logic for registering a user and saving their information.
     /// </summary>
@@ -35,10 +33,11 @@ namespace GuardianLock.MVVM.Model
                 }
 
                 string userId = Encryption.GenerateUserID();
-                string hashedPassword = Encryption.HashPassword(password, out byte[] salt);
+                string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+                string salt = BCrypt.Net.BCrypt.GenerateSalt();
                 string encryptionKey = Encryption.GenerateEncryptionKey();
 
-                string query = $"INSERT INTO Users (UserID, Username, PasswordHash, Salt, EncryptionKey) VALUES ('{userId}', '{username}', '{hashedPassword}', '{Convert.ToHexString(salt)}', '{encryptionKey}')";
+                string query = $"INSERT INTO Users (UserID, Username, PasswordHash, Salt, EncryptionKey) VALUES ('{userId}', '{username}', '{hashedPassword}', '{salt}', '{encryptionKey}')";
 
                 DAL.ExecuteQuery(query);
 

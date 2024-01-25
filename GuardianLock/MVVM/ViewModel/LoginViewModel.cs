@@ -1,12 +1,10 @@
-﻿using GuardianLock.Helper;
-using GuardianLock.Core;
+﻿using GuardianLock.Core;
 using System.Windows;
 using System.Security;
 using System.Net;
 using GuardianLock.Helper.DAL;
-using System.Text;
-using System.Diagnostics;
 using System.Data.SqlClient;
+using BCrypt.Net;
 
 namespace GuardianLock.MVVM.ViewModel
 {
@@ -110,21 +108,10 @@ namespace GuardianLock.MVVM.ViewModel
                 return false;
             }
 
-            // Retrieve salt as bytes directly
-            string passwordSaltString = DAL.ExecuteQuery("SELECT Salt FROM Users WHERE Username = @Username", new SqlParameter("@Username", username)).ToString();
-            byte[] passwordSaltBytes = Convert.FromBase64String(passwordSaltString);
-
-            string passwordHash = DAL.ExecuteQuery("SELECT PasswordHash FROM Users WHERE Username = @Username", new SqlParameter("@Username", username)).ToString();
             string passwordString = new NetworkCredential(string.Empty, password).Password;
+            string passwordHash = DAL.ExecuteQuery("SELECT PasswordHash FROM Users WHERE Username = @Username", new SqlParameter("@Username", username)).ToString();
 
-            // Convert salt to hex string for debugging purposes
-            string passwordSalt = BitConverter.ToString(passwordSaltBytes).Replace("-", "");
-            Debug.WriteLine(passwordSalt);
-
-            // Convert hex string back to bytes
-            byte[] salt = Convert.FromHexString(passwordSalt);
-
-            if (Encryption.VerifyPassword(passwordString, passwordSaltBytes, passwordHash))
+            if (BCrypt.Net.BCrypt.Verify(passwordString, passwordHash))
             {
                 return true;
             }
