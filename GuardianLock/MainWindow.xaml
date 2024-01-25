@@ -7,17 +7,16 @@
         xmlns:viewModel="clr-namespace:GuardianLock.MVVM.ViewModel"
         mc:Ignorable="d"
         Height="600" Width="920"
-        WindowStyle="None"
-        ResizeMode="NoResize"
-        Background="Transparent"
-        AllowsTransparency="True">
+        Title="GuardianLock"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize"
+        WindowStyle="SingleBorderWindow">
 
     <Window.DataContext>
         <viewModel:MainViewModel />
     </Window.DataContext>
 
-    <Border Background="#272537"
-            CornerRadius="10">
+    <Border Background="#272537">
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -26,21 +25,12 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="75" />
+                <RowDefinition Height="0" />
                 <RowDefinition />
-
             </Grid.RowDefinitions>
 
-            <TextBlock Text="GuardianLock"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
-                       Foreground="White"
-                       FontSize="22"
-                       Margin="20,0,0,0"
-                       FontFamily="/Fonts/#Poppins"/>
-
             <StackPanel Grid.Row="1">
-                <RadioButton Content="Home"
+                <RadioButton Content="Account"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
@@ -48,35 +38,28 @@
                              IsChecked="True"
                              Command="{Binding HomeViewCommand}"/>
 
-                <RadioButton Content="Discovery"
+                <RadioButton Content="Files"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding DiscoveryViewCommand}"/>
 
-                <RadioButton Content="Featured"
+                <RadioButton Content="Encrypt"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding HomeViewCommand}"/>
 
             </StackPanel>
 
-            <TextBox Width="250"
-                     Height="40"
-                     VerticalContentAlignment="Center"
-                     HorizontalAlignment="Left"
-                     Margin="5"
-                     Grid.Column="1"
-                     Style="{StaticResource ModernTextBox}"/>
 
             <ContentControl Grid.Row="1"
                             Grid.Column="1"
-                            Margin="10"
                             Content="{Binding CurrentView}"
                             FontFamily="Fonts/#Poppins"/>
+            
         </Grid>
-
     </Border>
 </Window>
