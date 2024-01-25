@@ -91,18 +91,19 @@ namespace GuardianLock.MVVM.ViewModel
             {
                 string passwordString = new NetworkCredential(string.Empty, password).Password;
 
-                RegistrationLogic.SaveRegistrationInfo(username, passwordString);
-
-                Login loginWindow = new();
-                Application.Current.MainWindow = loginWindow;
-                loginWindow.Show();
-
-                foreach (Window window in Application.Current.Windows)
+                if (RegistrationLogic.SaveRegistrationInfo(username, passwordString) == true)
                 {
-                    if (window is Register)
+                    Login loginWindow = new();
+                    Application.Current.MainWindow = loginWindow;
+                    loginWindow.Show();
+
+                    foreach (Window window in Application.Current.Windows)
                     {
-                        window.Close();
-                        break;
+                        if (window is Register)
+                        {
+                            window.Close();
+                            break;
+                        }
                     }
                 }
             }
@@ -126,7 +127,7 @@ namespace GuardianLock.MVVM.ViewModel
                 return false;
             }
 
-            if (username.Equals("admin") && passwordString.Equals("admin"))
+            if (username.Equals("Admin") && passwordString.Equals("Admin123!"))
             {
                 return true;
             }

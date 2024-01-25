@@ -1,6 +1,7 @@
 ﻿using GuardianLock.Helper.DAL;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 
 namespace GuardianLock.MVVM.Model
@@ -11,14 +12,27 @@ namespace GuardianLock.MVVM.Model
     public static class RegistrationLogic
     {
         /// <summary>
-        /// Saves the user's information in the database.
+        /// Saves the user's information in the database. Ch
         /// </summary>
         /// <param name="username">The username of the user.</param>
         /// <param name="password">The password of the user.</param>
-        public static void SaveRegistrationInfo(string username, string password)
+        public static bool SaveRegistrationInfo(string username, string password)
         {
             try
             {
+                int userExists = DAL.ExecuteQuery("SELECT * FROM Users WHERE Username = '" + username + "'");
+                if (userExists > 0)
+                {
+                    MessageBox.Show("A user with that username already exists. Please try again with a different username.");
+                    return false;
+                }
+
+                if (!EnsurePasswordIsSecure(password))
+                {
+                    MessageBox.Show("Your password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.");
+                    return false;
+                }
+
                 string userId = GenerateUserID();
                 string salt = HashPassword(password, out byte[] saltBytes);
                 string hashedPassword = HashPassword(password, out byte[] passwordBytes);
@@ -27,11 +41,23 @@ namespace GuardianLock.MVVM.Model
                 string query = $"INSERT INTO Users (UserID, Username, PasswordHash, Salt, EncryptionKey) VALUES ('{userId}', '{username}', '{hashedPassword}', '{salt}', '{encryptionKey}')";
 
                 DAL.ExecuteQuery(query);
+
+                int potentialUser = DAL.ExecuteQuery("SELECT * FROM Users WHERE Username = '" + username + "'");
+                if (potentialUser > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+
+            return false;
         }
 
         /// <summary>
@@ -78,6 +104,10 @@ namespace GuardianLock.MVVM.Model
             return encryptionKey;
         }
 
+        /// <summary>
+        /// Generates a random user ID.
+        /// </summary>
+        /// <returns>The generated user ID.</returns>
         static string GenerateUserID()
         {
             string userID = string.Empty;
@@ -90,6 +120,17 @@ namespace GuardianLock.MVVM.Model
                 MessageBox.Show(ex.Message);
             }
             return userID;
+        }
+
+        /// <summary>
+        /// Ensures that the password is secure.
+        /// </summary>
+        /// <returns><c>true</c> if the password is secure; otherwise, <c>false</c>.</returns>
+        static bool EnsurePasswordIsSecure(string password)
+        {
+            string pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$";
+
+            return Regex.IsMatch(password, pattern);
         }
     }
 }
