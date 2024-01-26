@@ -113,3 +113,23 @@ GO
 ALTER DATABASE [GuardianLock] SET  READ_WRITE 
 GO
 
+USE [GuardianLock]
+GO
+
+CREATE TABLE [Users] (
+    UserID INT PRIMARY KEY,
+    Username NVARCHAR(255) NOT NULL,
+    PasswordHash NVARCHAR(MAX) NOT NULL,
+    Salt NVARCHAR(MAX) NOT NULL,
+    EncryptionKey NVARCHAR(MAX) NOT NULL
+);
+
+CREATE TABLE [Files] (
+    FileID INT PRIMARY KEY,
+    FileName NVARCHAR(255) NOT NULL,
+    FilePath NVARCHAR(MAX) NOT NULL,
+    FileType NVARCHAR(50) NOT NULL,
+    FileSize BIGINT NOT NULL,
+    EncryptionStatus NVARCHAR(20) NOT NULL,
+    OwnerID INT FOREIGN KEY REFERENCES [Users](UserID)
+);
