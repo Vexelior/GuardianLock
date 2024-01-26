@@ -124,7 +124,6 @@ namespace GuardianLock.MVVM.ViewModel
             {
                 object verifiedUserId = DAL.ExecuteQuery("SELECT UserID FROM Users WHERE Username = @Username", new SqlParameter("@Username", username));
                 userContext.UserID = Convert.ToString(verifiedUserId);
-
                 userContext.Username = username;
                 userContext.EncryptionKey = DAL.ExecuteQuery("SELECT EncryptionKey FROM Users WHERE Username = @Username", new SqlParameter("@Username", username)).ToString();
 
