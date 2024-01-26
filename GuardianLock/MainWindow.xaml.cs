@@ -8,6 +8,9 @@ namespace GuardianLock
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Represents the main window of the application.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();

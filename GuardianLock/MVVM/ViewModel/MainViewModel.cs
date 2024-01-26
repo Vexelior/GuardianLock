@@ -1,5 +1,4 @@
 ﻿using GuardianLock.Core;
-using System;
 
 namespace GuardianLock.MVVM.ViewModel
 {

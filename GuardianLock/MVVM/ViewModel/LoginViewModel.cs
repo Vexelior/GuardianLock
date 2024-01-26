@@ -4,7 +4,6 @@ using System.Security;
 using System.Net;
 using GuardianLock.Helper.DAL;
 using System.Data.SqlClient;
-using BCrypt.Net;
 
 namespace GuardianLock.MVVM.ViewModel
 {
@@ -16,7 +15,8 @@ namespace GuardianLock.MVVM.ViewModel
 
         public string username;
         public SecureString password;
-        public UserContext userContext;
+        public UserContext UserContext { get; set; } = new UserContext();
+
 
         /// <summary>
         /// Gets or sets the username.
@@ -97,9 +97,9 @@ namespace GuardianLock.MVVM.ViewModel
 
         private void LoginSuccessful()
         {
-            App.CurrentUser.UserID = userContext.UserID;
-            App.CurrentUser.Username = userContext.Username;
-            App.CurrentUser.EncryptionKey = userContext.EncryptionKey;
+            App.CurrentUser.UserID = UserContext.UserID;
+            App.CurrentUser.Username = UserContext.Username;
+            App.CurrentUser.EncryptionKey = UserContext.EncryptionKey;
         }
 
         /// <summary>
@@ -123,9 +123,9 @@ namespace GuardianLock.MVVM.ViewModel
             if (BCrypt.Net.BCrypt.Verify(passwordString, passwordHash))
             {
                 object verifiedUserId = DAL.ExecuteQuery("SELECT UserID FROM Users WHERE Username = @Username", new SqlParameter("@Username", username));
-                userContext.UserID = Convert.ToString(verifiedUserId);
-                userContext.Username = username;
-                userContext.EncryptionKey = DAL.ExecuteQuery("SELECT EncryptionKey FROM Users WHERE Username = @Username", new SqlParameter("@Username", username)).ToString();
+                UserContext.UserID = Convert.ToString(verifiedUserId);
+                UserContext.Username = username;
+                UserContext.EncryptionKey = DAL.ExecuteQuery("SELECT EncryptionKey FROM Users WHERE Username = @Username", new SqlParameter("@Username", username)).ToString();
 
                 return true;
             }

@@ -13,6 +13,9 @@ namespace GuardianLock
     /// </summary>
     public partial class Register : Window
     {
+        /// <summary>
+        /// Represents the registration window of the application.
+        /// </summary>
         public Register()
         {
             InitializeComponent();
@@ -22,6 +25,11 @@ namespace GuardianLock
             this.Icon = BitmapFrame.Create(iconUri);
         }
 
+        /// <summary>
+        /// Event handler for the PasswordBox's PasswordChanged event.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (DataContext is RegisterViewModel viewModel)
@@ -31,6 +39,11 @@ namespace GuardianLock
             }
         }
 
+        /// <summary>
+        /// Event handler for the ConfirmPasswordBox's PasswordChanged event.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ConfirmPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (DataContext is RegisterViewModel viewModel)
@@ -59,6 +72,11 @@ namespace GuardianLock
             }
         }
 
+        /// <summary>
+        /// Converts a string password to a SecureString.
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
         private static SecureString ConvertToSecureString(string password)
         {
             if (string.IsNullOrEmpty(password))

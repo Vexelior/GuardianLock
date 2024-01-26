@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GuardianLock.MVVM.ViewModel
+﻿namespace GuardianLock.MVVM.ViewModel
 {
+    /// <summary>
+    /// Represents the view model for the MyFiles functionality.
+    /// </summary>
     class MyFilesViewModel
     {
     }

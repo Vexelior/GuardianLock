@@ -4,18 +4,21 @@ using System.Windows;
 
 namespace GuardianLock.Helper.DAL
 {
+    /// <summary>
+    /// Data Access Layer
+    /// </summary>
     public class DAL
     {
-        private readonly static string connectionString = "Data Source=(localdb)\\MSSQLLocalDb;Database=GuardianLock;Initial Catalog=GuardianLock;Integrated Security=True";
+        public readonly static string connectionString = "Data Source=(localdb)\\MSSQLLocalDb;Database=GuardianLock;Initial Catalog=GuardianLock;Integrated Security=True";
 
         /// <summary>
         /// Executes a query.
         /// </summary>
         /// <param name="query"></param>
-        /// <returns></returns>
+        /// <returns>Returns the result of the query.</returns>
         public static object ExecuteQuery(string query)
         {
-            object rowCount = null;
+            object result = null;
 
             SqlConnection connection = new(connectionString);
             SqlCommand command = new(query, connection);
@@ -31,11 +34,11 @@ namespace GuardianLock.Helper.DAL
 
                 if (query.Contains("SELECT"))
                 {
-                    rowCount = command.ExecuteScalar();
+                    result = command.ExecuteScalar();
                 }
                 else if (query.Contains("INSERT") || query.Contains("UPDATE") || query.Contains("DELETE"))
                 {
-                    rowCount = command.ExecuteNonQuery();
+                    result = command.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)
@@ -47,7 +50,7 @@ namespace GuardianLock.Helper.DAL
                 connection.Close();
             }
 
-            return rowCount;
+            return result;
         }
 
         /// <summary>
@@ -87,6 +90,60 @@ namespace GuardianLock.Helper.DAL
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            else
+            {
+                return null;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Executes a query with the given parameters.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public static object ExecuteQuery(string query, SqlParameter[] parameters)
+        {
+            using SqlConnection connection = new(connectionString);
+            using SqlCommand command = new(query, connection);
+
+            object result = null;
+
+            if (parameters != null)
+            {
+                try
+                {
+                    connection.Open();
+                    command.CommandText = query;
+                    command.CommandType = CommandType.Text;
+                    command.Connection = connection;
+                    command.CommandTimeout = 12 * 3600;
+
+                    foreach (SqlParameter parameter in parameters)
+                    {
+                        command.Parameters.Add(parameter);
+                    }
+
+                    if (query.Contains("SELECT"))
+                    {
+                        result = command.ExecuteScalar();
+                    }
+                    else if (query.Contains("INSERT") || query.Contains("UPDATE") || query.Contains("DELETE"))
+                    {
+                        result = command.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 finally
                 {

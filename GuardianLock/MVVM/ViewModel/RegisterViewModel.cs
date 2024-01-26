@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Security;
 using System.Net;
-using GuardianLock.Helper.DAL;
 using GuardianLock.MVVM.Model;
 
 namespace GuardianLock.MVVM.ViewModel
@@ -87,12 +86,14 @@ namespace GuardianLock.MVVM.ViewModel
         /// <param name="parameter">The command parameter.</param>
         private void Register(object parameter)
         {
-            if (IsValidCredentials(username, password, confirmPassword))
+            if (IsValidCredentials(password, confirmPassword))
             {
                 string passwordString = new NetworkCredential(string.Empty, password).Password;
 
                 if (RegistrationModel.SaveRegistrationInfo(username, passwordString) == true)
                 {
+                    MessageBox.Show("Registration successful!", "Register Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
                     Login loginWindow = new();
                     Application.Current.MainWindow = loginWindow;
                     loginWindow.Show();
@@ -117,7 +118,7 @@ namespace GuardianLock.MVVM.ViewModel
         /// Validates the user credentials.
         /// </summary>
         /// <returns><c>true</c> if the credentials are valid; otherwise, <c>false</c>.</returns>
-        private static bool IsValidCredentials(string username, SecureString password, SecureString confirmPassword)
+        private static bool IsValidCredentials(SecureString password, SecureString confirmPassword)
         {
             string passwordString = new NetworkCredential(string.Empty, password).Password;
             string confirmPasswordString = new NetworkCredential(string.Empty, confirmPassword).Password;
