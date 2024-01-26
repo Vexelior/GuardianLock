@@ -117,7 +117,7 @@ USE [GuardianLock]
 GO
 
 CREATE TABLE [Users] (
-    UserID INT PRIMARY KEY,
+    UserID NVARCHAR(255) PRIMARY KEY,
     Username NVARCHAR(255) NOT NULL,
     PasswordHash NVARCHAR(MAX) NOT NULL,
     Salt NVARCHAR(MAX) NOT NULL,
@@ -131,5 +131,5 @@ CREATE TABLE [Files] (
     FileType NVARCHAR(50) NOT NULL,
     FileSize BIGINT NOT NULL,
     EncryptionStatus NVARCHAR(20) NOT NULL,
-    OwnerID INT FOREIGN KEY REFERENCES [Users](UserID)
+    OwnerID NVARCHAR(255) FOREIGN KEY REFERENCES [Users](UserID)
 );
