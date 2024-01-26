@@ -36,21 +36,21 @@
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              IsChecked="True"
-                             Command="{Binding HomeViewCommand}"/>
+                             Command="{Binding AccountViewCommand}"/>
 
                 <RadioButton Content="Files"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding DiscoveryViewCommand}"/>
+                             Command="{Binding MyFilesViewCommand}"/>
 
                 <RadioButton Content="Encrypt"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding HomeViewCommand}"/>
+                             Command="{Binding AccountViewCommand}"/>
 
             </StackPanel>
 

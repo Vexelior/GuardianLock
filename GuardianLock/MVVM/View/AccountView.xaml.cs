@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GuardianLock.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,11 +17,11 @@ using System.Windows.Shapes;
 namespace GuardianLock.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for DiscoveryView.xaml
+    /// Interaction logic for HomeView.xaml
     /// </summary>
-    public partial class DiscoveryView : UserControl
+    public partial class AccountView : UserControl
     {
-        public DiscoveryView()
+        public AccountView()
         {
             InitializeComponent();
         }

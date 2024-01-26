@@ -61,22 +61,44 @@ namespace GuardianLock.Helper.DAL
             using SqlConnection connection = new(connectionString);
             using SqlCommand command = new(query, connection);
 
+            object result = null;
+
             if (parameters != null)
             {
-                connection.Open();
-                command.CommandText = query;
-                command.CommandType = CommandType.Text;
-                command.Connection = connection;
-                command.CommandTimeout = 12 * 3600;
+                try
+                {
+                    connection.Open();
+                    command.CommandText = query;
+                    command.CommandType = CommandType.Text;
+                    command.Connection = connection;
+                    command.CommandTimeout = 12 * 3600;
 
-                command.Parameters.Add(parameters);
+                    command.Parameters.Add(parameters);
+
+                    if (query.Contains("SELECT"))
+                    {
+                        result = command.ExecuteScalar();
+                    }
+                    else if (query.Contains("INSERT") || query.Contains("UPDATE") || query.Contains("DELETE"))
+                    {
+                        result = command.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
             }
             else
             {
                 return null;
             }
 
-            return command.ExecuteScalar();
+            return result;
         }
     }
 }

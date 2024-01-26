@@ -5,12 +5,12 @@ namespace GuardianLock.MVVM.ViewModel
 {
     class MainViewModel : ObservableObject
     {
-        public RelayCommand HomeViewCommand { get; set; }
-        public RelayCommand DiscoveryViewCommand { get; set; }
+        public RelayCommand AccountViewCommand { get; set; }
+        public RelayCommand MyFilesViewCommand { get; set; }
 
 
-        public HomeViewModel HomeVM { get; set; }
-        public DiscoveryViewModel DiscoveryVM { get; set; }
+        public AccountViewModel AccountVM { get; set; }
+        public MyFilesViewModel MyFilesVM { get; set; }
 
 
         private object _currentView;
@@ -27,19 +27,19 @@ namespace GuardianLock.MVVM.ViewModel
 
         public MainViewModel()
         {
-            HomeVM = new HomeViewModel();
-            DiscoveryVM = new DiscoveryViewModel();
+            AccountVM = new AccountViewModel();
+            MyFilesVM = new MyFilesViewModel();
 
-            CurrentView = HomeVM;
+            CurrentView = AccountVM;
 
-            HomeViewCommand = new RelayCommand(o =>
+            AccountViewCommand = new RelayCommand(o =>
             {
-                CurrentView = HomeVM;
+                CurrentView = AccountVM;
             });
 
-            DiscoveryViewCommand = new RelayCommand(o =>
+            MyFilesViewCommand = new RelayCommand(o =>
             {
-                CurrentView = DiscoveryVM;
+                CurrentView = MyFilesVM;
             });
         }
     }

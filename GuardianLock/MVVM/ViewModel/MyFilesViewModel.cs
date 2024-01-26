@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GuardianLock.MVVM.ViewModel
 {
-    class HomeViewModel
+    class MyFilesViewModel
     {
     }
 }

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace GuardianLock.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for HomeView.xaml
+    /// Interaction logic for DiscoveryView.xaml
     /// </summary>
-    public partial class HomeView : UserControl
+    public partial class MyFilesView : UserControl
     {
-        public HomeView()
+        public MyFilesView()
         {
             InitializeComponent();
         }

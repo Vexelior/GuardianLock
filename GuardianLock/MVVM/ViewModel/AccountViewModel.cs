@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace GuardianLock.MVVM.ViewModel
 {
-    class DiscoveryViewModel
+    public class AccountViewModel
     {
+        public string DisplayUserInfo => $"Welcome, {App.CurrentUser.Username}"!;
     }
 }
