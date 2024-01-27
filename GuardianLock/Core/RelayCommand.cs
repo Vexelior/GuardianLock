@@ -7,8 +7,8 @@ namespace GuardianLock.Core
     /// </summary>
     public class RelayCommand : ICommand
     {
-        private Action<object> _Execute;
-        private Func<object, bool> _CanExecute;
+        private readonly Action<object> _Execute;
+        private readonly Func<object, bool> _CanExecute;
 
         /// <summary>
         /// Occurs when changes occur that affect whether or not the command can execute.
