@@ -13,7 +13,7 @@ namespace GuardianLock.MVVM.ViewModel
     class LoginViewModel : ObservableObject
     {
 
-        public string username;
+        public string email;
         public SecureString password;
         public UserContext UserContext { get; set; } = new UserContext();
 
@@ -21,13 +21,13 @@ namespace GuardianLock.MVVM.ViewModel
         /// <summary>
         /// Gets or sets the username.
         /// </summary>
-        public string Username
+        public string Email
         {
-            get { return username; }
+            get { return email; }
             set
             {
-                username = value;
-                OnPropertyChanged(nameof(Username));
+                email = value;
+                OnPropertyChanged(nameof(Email));
             }
         }
 
@@ -64,7 +64,7 @@ namespace GuardianLock.MVVM.ViewModel
         /// <returns><c>true</c> if the login command can be executed; otherwise, <c>false</c>.</returns>
         private bool CanLogin(object parameter)
         {
-            return !string.IsNullOrEmpty(Username) && Password != null && Password.Length > 0;
+            return !string.IsNullOrEmpty(Email) && Password != null && Password.Length > 0;
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace GuardianLock.MVVM.ViewModel
         /// <param name="parameter">The command parameter.</param>
         private void Login(object parameter)
         {
-            if (IsValidCredentials(username, password))
+            if (IsValidCredentials(email, password))
             {
                 LoginSuccessful();
                 MainWindow mainWindow = new();
@@ -89,16 +89,12 @@ namespace GuardianLock.MVVM.ViewModel
                     }
                 }
             }
-            else
-            {
-                MessageBox.Show("Invalid username or password.", "Oops!", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
         }
 
         private void LoginSuccessful()
         {
             App.CurrentUser.UserID = UserContext.UserID;
-            App.CurrentUser.Username = UserContext.Username;
+            App.CurrentUser.Email = UserContext.Email;
             App.CurrentUser.EncryptionKey = UserContext.EncryptionKey;
         }
 
@@ -106,26 +102,26 @@ namespace GuardianLock.MVVM.ViewModel
         /// Validates the user credentials.
         /// </summary>
         /// <returns><c>true</c> if the credentials are valid; otherwise, <c>false</c>.</returns>
-        private bool IsValidCredentials(string username, SecureString password)
+        private bool IsValidCredentials(string email, SecureString password)
         {
             // Use parameterized queries to avoid SQL injection
-            object userNameExists = DAL.ExecuteQuery("SELECT * FROM Users WHERE Username = @Username", new SqlParameter("@Username", username));
+            object userNameExists = DAL.ExecuteQuery("SELECT * FROM Users WHERE Email = @Email", new SqlParameter("@Email", email));
 
             if (userNameExists == null)
             {
-                MessageBox.Show("Invalid username or password.", "Oops!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Invalid email or password.", "Oops!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
             string passwordString = new NetworkCredential(string.Empty, password).Password;
-            string passwordHash = DAL.ExecuteQuery("SELECT PasswordHash FROM Users WHERE Username = @Username", new SqlParameter("@Username", username)).ToString();
+            string passwordHash = DAL.ExecuteQuery("SELECT PasswordHash FROM Users WHERE Email = @Email", new SqlParameter("@Email", email)).ToString();
 
             if (BCrypt.Net.BCrypt.Verify(passwordString, passwordHash))
             {
-                object verifiedUserId = DAL.ExecuteQuery("SELECT UserID FROM Users WHERE Username = @Username", new SqlParameter("@Username", username));
+                object verifiedUserId = DAL.ExecuteQuery("SELECT UserID FROM Users WHERE Email = @Email", new SqlParameter("@Email", email));
                 UserContext.UserID = Convert.ToString(verifiedUserId);
-                UserContext.Username = username;
-                UserContext.EncryptionKey = DAL.ExecuteQuery("SELECT EncryptionKey FROM Users WHERE Username = @Username", new SqlParameter("@Username", username)).ToString();
+                UserContext.Email = email;
+                UserContext.EncryptionKey = DAL.ExecuteQuery("SELECT EncryptionKey FROM Users WHERE Email = @Email", new SqlParameter("@Email", email)).ToString();
 
                 return true;
             }

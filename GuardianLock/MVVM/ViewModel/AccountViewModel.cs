@@ -2,6 +2,6 @@
 {
     public class AccountViewModel
     {
-        public static string WelcomeMessage => $"Welcome, {App.CurrentUser.Username}!";
+        public static string WelcomeMessage => $"Welcome, {App.CurrentUser.Email}!";
     }
 }

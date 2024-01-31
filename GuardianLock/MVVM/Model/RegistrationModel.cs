@@ -15,14 +15,14 @@ namespace GuardianLock.MVVM.Model
         /// </summary>
         /// <param name="username">The username of the user.</param>
         /// <param name="password">The password of the user.</param>
-        public static bool SaveRegistrationInfo(string username, string password)
+        public static bool SaveRegistrationInfo(string email, string firstName, string lastName, string password)
         {
             try
             {
-                object userExists = DAL.ExecuteQuery("SELECT * FROM Users WHERE Username = @Username", new SqlParameter("@Username", username));
+                object userExists = DAL.ExecuteQuery("SELECT * FROM Users WHERE Email = @Email", new SqlParameter("@Username", email));
                 if (userExists is not null)
                 {
-                    MessageBox.Show("A user with that username already exists. Please try again with a different username.", "User Already Exists", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("A user with that email already exists. Please try again with a different username.", "Already Exists", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
 
@@ -40,17 +40,19 @@ namespace GuardianLock.MVVM.Model
                 SqlParameter[] parameters =
                 [
                     new("@UserID", userId),
-                    new("@Username", username),
+                    new("@Email", email),
+                    new("@FirstName", firstName),
+                    new("@LastName", lastName),
                     new("@PasswordHash", hashedPassword),
                     new("@Salt", salt),
                     new("@EncryptionKey", encryptionKey)
                 ];
 
-                string query = $"INSERT INTO Users (UserID, Username, PasswordHash, Salt, EncryptionKey) VALUES (@UserID, @Username, @PasswordHash, @Salt, @EncryptionKey)";
+                string query = $"INSERT INTO Users (UserID, Email, FirstName, LastName, PasswordHash, Salt, EncryptionKey) VALUES (@UserID, @Email, @FirstName, @LastName, @PasswordHash, @Salt, @EncryptionKey)";
 
                 DAL.ExecuteQuery(query, parameters);
 
-                object potentialUser = DAL.ExecuteQuery("SELECT * FROM Users WHERE Username = @Username", new SqlParameter("@Username", username));
+                object potentialUser = DAL.ExecuteQuery("SELECT * FROM Users WHERE Email = @Email", new SqlParameter("@Email", email));
                 if (potentialUser is not null)
                 {
                     return true;

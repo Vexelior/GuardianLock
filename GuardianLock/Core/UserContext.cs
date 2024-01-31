@@ -13,7 +13,7 @@
         /// <summary>
         /// Gets or sets the username of the user.
         /// </summary>
-        public string Username { get; set; }
+        public string Email { get; set; }
 
         /// <summary>
         /// Gets or sets the encryption key of the user.

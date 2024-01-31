@@ -12,20 +12,48 @@ namespace GuardianLock.MVVM.ViewModel
     class RegisterViewModel : ObservableObject
     {
 
-        public string username;
+        public string email;
+        public string firstName;
+        public string lastName;
         public SecureString password;
         public SecureString confirmPassword;
 
         /// <summary>
         /// Gets or sets the username.
         /// </summary>
-        public string Username
+        public string Email
         {
-            get { return username; }
+            get { return email; }
             set
             {
-                username = value;
-                OnPropertyChanged(nameof(Username));
+                email = value;
+                OnPropertyChanged(nameof(Email));
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the first name.
+        /// </summary>
+        public string FirstName
+        {
+            get { return firstName; }
+            set
+            {
+                firstName = value;
+                OnPropertyChanged(nameof(FirstName));
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the last name.
+        /// </summary>
+        public string LastName
+        {
+            get { return lastName; }
+            set
+            {
+                lastName = value;
+                OnPropertyChanged(nameof(LastName));
             }
         }
 
@@ -75,7 +103,7 @@ namespace GuardianLock.MVVM.ViewModel
         /// <returns><c>true</c> if the register command can be executed; otherwise, <c>false</c>.</returns>
         private bool CanRegister(object parameter)
         {
-            return !string.IsNullOrEmpty(Username) && 
+            return !string.IsNullOrEmpty(Email) && 
                     Password != null && Password.Length > 0 && 
                     ConfirmPassword != null && ConfirmPassword.Length > 0;
         }
@@ -90,7 +118,7 @@ namespace GuardianLock.MVVM.ViewModel
             {
                 string passwordString = new NetworkCredential(string.Empty, password).Password;
 
-                if (RegistrationModel.SaveRegistrationInfo(username, passwordString) == true)
+                if (RegistrationModel.SaveRegistrationInfo(email, firstName, lastName, passwordString))
                 {
                     MessageBox.Show("Registration successful!", "Register Success", MessageBoxButton.OK, MessageBoxImage.Information);
 

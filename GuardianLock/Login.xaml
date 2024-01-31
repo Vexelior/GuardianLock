@@ -23,9 +23,9 @@
         <TextBlock Text="GuardianLock" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Margin="0,115,0,0" />
 
         <StackPanel Grid.Row="2" Margin="20">
-            <TextBlock Text="Username" Foreground="White"/>
+            <TextBlock Text="Email" Foreground="White"/>
             <TextBox x:Name="UsernameTextBox" Margin="0,5,0,10" Height="30" VerticalAlignment="Top" Background="LightGray" Foreground="Black"
-             Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Padding="0,5,0,5"/>
+             Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Padding="0,5,0,5"/>
 
             <TextBlock Text="Password" Foreground="White"/>
             <PasswordBox x:Name="PasswordBox" Margin="0,5,0,10" Height="30" VerticalAlignment="Top" Background="LightGray" Foreground="Black" PasswordChanged="PasswordBox_PasswordChanged" Padding="0,5,0,5"/>
