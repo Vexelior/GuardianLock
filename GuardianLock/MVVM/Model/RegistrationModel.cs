@@ -19,7 +19,7 @@ namespace GuardianLock.MVVM.Model
         {
             try
             {
-                object userExists = DAL.ExecuteQuery("SELECT * FROM Users WHERE Email = @Email", new SqlParameter("@Username", email));
+                object userExists = DAL.ExecuteQuery("SELECT * FROM Users WHERE Email = @Email", new SqlParameter("@Email", email));
                 if (userExists is not null)
                 {
                     MessageBox.Show("A user with that email already exists. Please try again with a different username.", "Already Exists", MessageBoxButton.OK, MessageBoxImage.Warning);
