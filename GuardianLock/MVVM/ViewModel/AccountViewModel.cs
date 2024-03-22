@@ -2,6 +2,18 @@
 {
     public class AccountViewModel
     {
-        public static string WelcomeMessage => $"Welcome, {App.CurrentUser.Email}!";
+        /// <summary>
+        /// Welcome message.
+        /// </summary>
+        public static string WelcomeMessage => $"Welcome, {App.CurrentUser.FirstName}!";
+
+        /// <summary>
+        /// Encryption key of the current user.
+        /// </summary>
+        public static string EncryptionKey => $"Encryption Key: {App.CurrentUser.EncryptionKey}";
+
+        public AccountViewModel()
+        {
+        }
     }
 }

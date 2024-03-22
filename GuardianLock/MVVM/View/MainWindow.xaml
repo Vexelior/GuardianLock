@@ -52,6 +52,19 @@
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding AccountViewCommand}"/>
 
+                <RadioButton Content="Decrypt"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding AccountViewCommand}"/>
+
+                <RadioButton Content="Settings"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding AccountViewCommand}"/>
             </StackPanel>
 
 

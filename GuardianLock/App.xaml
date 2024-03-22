@@ -4,9 +4,10 @@
              xmlns:local="clr-namespace:GuardianLock"
              xmlns:viewModel="clr-namespace:GuardianLock.MVVM.ViewModel"
              xmlns:view="clr-namespace:GuardianLock.MVVM.View"
-             StartupUri="Login.xaml">
+             StartupUri="MVVM/View/Login.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/MenuButtonTheme.xaml" />
                 <ResourceDictionary Source="Themes/TextBoxTheme.xaml" />

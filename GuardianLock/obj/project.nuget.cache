@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "FFK5kwLXHy8WVdIgun4eiT0wLxqv7N/d8A0yuEHHaBf9nDARJtYOEIj8AI5l8JU+IkDsOX78nGvqJMAAK4Ik4A==",
+  "dgSpecHash": "xzhjMN+AN70Mp1ZAY3/IYSWPkeNdNvkofDvCzTcbCIxkh83Jj4cp+1SpN0tviC51Ui4VXBF+sJLkb3F9qPU3wg==",
   "success": true,
   "projectFilePath": "C:\\Users\\asand\\Documents\\GitHub\\GuardianLock\\GuardianLock\\GuardianLock.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\asand\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
+    "C:\\Users\\asand\\.nuget\\packages\\fontawesome.sharp\\6.3.0\\fontawesome.sharp.6.3.0.nupkg.sha512",
     "C:\\Users\\asand\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\asand\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\asand\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.7.0\\runtime.native.system.data.sqlclient.sni.4.7.0.nupkg.sha512",

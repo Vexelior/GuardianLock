@@ -12,11 +12,18 @@ namespace GuardianLock.MVVM.ViewModel
     /// </summary>
     class LoginViewModel : ObservableObject
     {
-
+        /// <summary>
+        /// The email from the view to be used in the view model.
+        /// </summary>
         public string email;
+        /// <summary>
+        /// The password from the view to be used in the view model.
+        /// </summary>
         public SecureString password;
+        /// <summary>
+        /// The user context to be used in the main window.
+        /// </summary>
         public UserContext UserContext { get; set; } = new UserContext();
-
 
         /// <summary>
         /// Gets or sets the username.
@@ -91,9 +98,14 @@ namespace GuardianLock.MVVM.ViewModel
             }
         }
 
+        /// <summary>
+        /// Sets the current user context after a successful login.
+        /// </summary>
         private void LoginSuccessful()
         {
             App.CurrentUser.UserID = UserContext.UserID;
+            App.CurrentUser.FirstName = UserContext.FirstName;
+            App.CurrentUser.LastName = UserContext.LastName;
             App.CurrentUser.Email = UserContext.Email;
             App.CurrentUser.EncryptionKey = UserContext.EncryptionKey;
         }
@@ -121,6 +133,8 @@ namespace GuardianLock.MVVM.ViewModel
                 object verifiedUserId = DAL.ExecuteQuery("SELECT UserID FROM Users WHERE Email = @Email", new SqlParameter("@Email", email));
                 UserContext.UserID = Convert.ToString(verifiedUserId);
                 UserContext.Email = email;
+                UserContext.FirstName = DAL.ExecuteQuery("SELECT FirstName FROM Users WHERE Email = @Email", new SqlParameter("@Email", email)).ToString();
+                UserContext.LastName = DAL.ExecuteQuery("SELECT LastName FROM Users WHERE Email = @Email", new SqlParameter("@Email", email)).ToString();
                 UserContext.EncryptionKey = DAL.ExecuteQuery("SELECT EncryptionKey FROM Users WHERE Email = @Email", new SqlParameter("@Email", email)).ToString();
 
                 return true;

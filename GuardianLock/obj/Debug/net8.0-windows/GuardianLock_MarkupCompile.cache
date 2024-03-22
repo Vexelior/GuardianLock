@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\asand\Documents\GitHub\GuardianLock\GuardianLock\App.xaml
-7-554975870
+7-251885456
 
-20463795497
-2001201536795
-Login.xaml;MainWindow.xaml;MVVM\View\AccountView.xaml;MVVM\View\MyFilesView.xaml;Register.xaml;Themes\MenuButtonTheme.xaml;Themes\TextBoxTheme.xaml;
+20-1435881107
+2101181060676
+MVVM\View\AccountView.xaml;MVVM\View\Login.xaml;MVVM\View\MainWindow.xaml;MVVM\View\MyFilesView.xaml;MVVM\View\Register.xaml;Themes\MenuButtonTheme.xaml;Themes\TextBoxTheme.xaml;
 
 False
 

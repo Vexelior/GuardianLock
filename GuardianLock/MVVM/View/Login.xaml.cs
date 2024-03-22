@@ -32,7 +32,7 @@ namespace GuardianLock
         {
             if (DataContext is LoginViewModel viewModel)
             {
-                var passwordBox = (PasswordBox)sender;
+                PasswordBox passwordBox = (PasswordBox)sender;
                 viewModel.Password = ConvertToSecureString(passwordBox.Password);
             }
         }
@@ -65,9 +65,12 @@ namespace GuardianLock
         private static SecureString ConvertToSecureString(string password)
         {
             if (string.IsNullOrEmpty(password))
+            {
                 return null;
 
-            var securePassword = new SecureString();
+            }
+
+            SecureString securePassword = new();
             foreach (char c in password)
             {
                 securePassword.AppendChar(c);
