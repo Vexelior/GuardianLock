@@ -11,6 +11,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/MenuButtonTheme.xaml" />
                 <ResourceDictionary Source="Themes/TextBoxTheme.xaml" />
+                <ResourceDictionary Source="Themes/UIColors.xaml" />
+                <ResourceDictionary Source="Themes/ButtonStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:AccountViewModel}">

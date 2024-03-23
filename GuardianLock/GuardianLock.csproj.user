@@ -33,6 +33,12 @@
     <Page Update="MVVM\View\AccountView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Themes\ButtonStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\UIColors.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Themes\MenuButtonTheme.xaml">
       <SubType>Designer</SubType>
     </Page>

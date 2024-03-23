@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\asand\Documents\GitHub\GuardianLock\GuardianLock\App.xaml
-7-251885456
+9973127672
 
 22804014911
 2101181060676
-MVVM\View\AccountView.xaml;MVVM\View\Login.xaml;MVVM\View\MainWindow.xaml;MVVM\View\MyFilesView.xaml;MVVM\View\Register.xaml;Themes\MenuButtonTheme.xaml;Themes\TextBoxTheme.xaml;
+MVVM\View\AccountView.xaml;MVVM\View\Login.xaml;MVVM\View\MainWindow.xaml;MVVM\View\MyFilesView.xaml;MVVM\View\Register.xaml;Themes\ButtonStyle.xaml;Themes\MenuButtonTheme.xaml;Themes\TextBoxTheme.xaml;Themes\UIColors.xaml;
 
-True
+False
 

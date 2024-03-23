@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GuardianLock"
         xmlns:viewModel="clr-namespace:GuardianLock.MVVM.ViewModel"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
         Height="600" Width="920"
         Title="GuardianLock"
@@ -16,8 +17,14 @@
         <viewModel:MainViewModel />
     </Window.DataContext>
 
-    <Border Background="#272537">
-
+    <Border BorderThickness="1">
+        <Border.BorderBrush >
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="{StaticResource winBorderColor1}" Offset="0"/>
+                <GradientStop Color="{StaticResource winBorderColor2}" Offset="0.5"/>
+                <GradientStop Color="{StaticResource winBorderColor3}" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200" />
@@ -29,50 +36,58 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="1">
-                <RadioButton Content="Account"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"
+            <StackPanel Grid.Row="1" Background="{StaticResource color11}">
+                <RadioButton
+                             Style="{StaticResource menuButton}"
                              IsChecked="True"
-                             Command="{Binding AccountViewCommand}"/>
+                             Command="{Binding AccountViewCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
+                        <TextBlock Text="Home" Style="{StaticResource menuButtonText}" />
+                    </StackPanel>
+                </RadioButton>
 
-                <RadioButton Content="Files"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding MyFilesViewCommand}"/>
+                <RadioButton
+                             Style="{StaticResource menuButton}"
+                             Command="{Binding AccountViewCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="FileAlt" Style="{StaticResource menuButtonIcon}"/>
+                        <TextBlock Text="Files" Style="{StaticResource menuButtonText}" />
+                    </StackPanel>
+                </RadioButton>
 
-                <RadioButton Content="Encrypt"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding AccountViewCommand}"/>
+                <RadioButton
+                             Style="{StaticResource menuButton}"
+                             Command="{Binding AccountViewCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="Lock" Style="{StaticResource menuButtonIcon}"/>
+                        <TextBlock Text="Encrypt" Style="{StaticResource menuButtonText}" />
+                    </StackPanel>
+                </RadioButton>
 
-                <RadioButton Content="Decrypt"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding AccountViewCommand}"/>
+                <RadioButton
+                             Style="{StaticResource menuButton}"
+                             Command="{Binding AccountViewCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="LockOpen" Style="{StaticResource menuButtonIcon}"/>
+                        <TextBlock Text="Decrypt" Style="{StaticResource menuButtonText}" />
+                    </StackPanel>
+                </RadioButton>
 
-                <RadioButton Content="Settings"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding AccountViewCommand}"/>
+                <RadioButton
+                             Style="{StaticResource menuButton}"
+                             Command="{Binding AccountViewCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="Gear" Style="{StaticResource menuButtonIcon}"/>
+                        <TextBlock Text="Settings" Style="{StaticResource menuButtonText}" />
+                    </StackPanel>
+                </RadioButton>
             </StackPanel>
-
 
             <ContentControl Grid.Row="1"
                             Grid.Column="1"
                             Content="{Binding CurrentView}"
                             FontFamily="Fonts/#Poppins"/>
-            
         </Grid>
     </Border>
 </Window>
